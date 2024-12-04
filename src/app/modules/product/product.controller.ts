@@ -40,14 +40,14 @@ const getAllProducts = async (req: Request, res: Response) => {
         product.name.toLowerCase().includes(searchTerm as string),
       );
       res.status(StatusCodes.OK).json({
-        success: true,
-        message: `Products matching search term '${searchTerm}' fetched successfully!`,
+        message: 'Bikes retrieved successfully',
+        status: true,
         data: filteredProducts,
       });
     } else {
       res.status(StatusCodes.OK).json({
         message: 'Bikes retrieved successfully',
-        success: true,
+        status: true,
         data: result,
       });
     }
@@ -65,8 +65,8 @@ const getSingleProduct = async (req: Request, res: Response) => {
     const id = req.params.productId;
     const result = await ProductServices.getSingleProductFromDB(id);
     res.status(StatusCodes.OK).json({
-      success: true,
-      message: 'Product fetched successfully!',
+      message: '"Bike retrieved successfully',
+      status: true,
       data: result,
     });
   } catch (err: any) {
@@ -89,8 +89,8 @@ const updateSingleProduct = async (req: Request, res: Response) => {
     if (result.modifiedCount) {
       const result2 = await ProductServices.getSingleProductFromDB(id);
       res.status(StatusCodes.OK).json({
-        success: true,
-        message: 'Product updated successfully!',
+        message: 'Bike updated successfully',
+        status: true,
         data: result2,
       });
     }
@@ -107,8 +107,8 @@ const deleteSingleProduct = async (req: Request, res: Response) => {
     const id = req.params.productId;
     await ProductServices.deleteSingleProductFromDB(id);
     res.status(StatusCodes.OK).json({
-      success: true,
-      message: 'Product deleted successfully!',
+      message: 'Bike deleted successfully',
+      status: true,
       data: null,
     });
   } catch (err: any) {
@@ -126,5 +126,4 @@ export const ProductControllers = {
   getSingleProduct,
   updateSingleProduct,
   deleteSingleProduct,
-  // searchProducts,
 };
